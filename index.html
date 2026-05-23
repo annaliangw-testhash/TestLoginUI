@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>登录</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 48px 40px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .logo-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .logo h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1a1a2e;
+    }
+
+    .logo p {
+      font-size: 13px;
+      color: #888;
+      margin-top: 4px;
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #444;
+      margin-bottom: 8px;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      background: #fafafa;
+    }
+
+    input:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+      background: #fff;
+    }
+
+    #password { padding-right: 48px; }
+
+    #togglePassword {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      padding: 0;
+      line-height: 1;
+    }
+
+    .extras {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      font-size: 13px;
+    }
+
+    .remember {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #555;
+      cursor: pointer;
+    }
+
+    .forgot { color: #667eea; text-decoration: none; }
+    .forgot:hover { text-decoration: underline; }
+
+    #loginBtn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+      letter-spacing: 2px;
+    }
+
+    #loginBtn:hover:not(:disabled) { opacity: 0.9; }
+    #loginBtn:active:not(:disabled) { transform: scale(0.98); }
+    #loginBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .message {
+      display: none;
+      margin-top: 16px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .message.error   { background: #fff0f0; color: #d32f2f; border: 1px solid #ffcdd2; }
+    .message.success { background: #f0fff4; color: #2e7d32; border: 1px solid #c8e6c9; }
+
+    .divider {
+      text-align: center;
+      margin: 24px 0 16px;
+      font-size: 12px;
+      color: #bbb;
+      position: relative;
+    }
+
+    .divider::before, .divider::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 42%;
+      height: 1px;
+      background: #eee;
+    }
+
+    .divider::before { left: 0; }
+    .divider::after  { right: 0; }
+
+    .register {
+      text-align: center;
+      font-size: 13px;
+      color: #888;
+    }
+
+    .register a { color: #667eea; text-decoration: none; font-weight: 600; }
+    .register a:hover { text-decoration: underline; }
+
+    .hint {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 11px;
+      color: #bbb;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">
+      <div class="logo-icon">🔐</div>
+      <h1>欢迎回来</h1>
+      <p>请登录您的账户</p>
+    </div>
+
+    <form id="loginForm">
+      <div class="field">
+        <label for="username">用户名</label>
+        <input type="text" id="username" placeholder="请输入用户名" autocomplete="username" />
+      </div>
+
+      <div class="field">
+        <label for="password">密码</label>
+        <div class="input-wrap">
+          <input type="password" id="password" placeholder="请输入密码" autocomplete="current-password" />
+          <button type="button" id="togglePassword" title="显示/隐藏密码">
+            <span id="toggleIcon">👁️</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="extras">
+        <label class="remember">
+          <input type="checkbox" /> 记住我
+        </label>
+        <a href="#" class="forgot">忘记密码？</a>
+      </div>
+
+      <button type="submit" id="loginBtn">登 录</button>
+      <div id="message" class="message"></div>
+    </form>
+
+    <div class="divider">或</div>
+    <div class="register">还没有账户？<a href="#">立即注册</a></div>
+
+    <p class="hint">测试账号：admin / 123456</p>
+  </div>
+
+  <script type="module" src="dist/login.js"></script>
+</body>
+</html>
