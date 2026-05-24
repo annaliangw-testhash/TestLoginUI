@@ -17,7 +17,7 @@ function validateForm(data: LoginFormData): ValidationResult {
   if (!data.password) {
     return { valid: false, message: "请输入密码" };
   }
-  if (data.password.length < 6) {
+  if (data.password.length < 7) {
     return { valid: false, message: "密码至少需要6位" };
   }
   return { valid: true, message: "" };
