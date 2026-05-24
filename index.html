@@ -187,6 +187,37 @@
       font-size: 11px;
       color: #bbb;
     }
+
+    .tooltip {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: #fff;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s;
+      z-index: 10;
+    }
+
+    .tooltip::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 5px solid transparent;
+      border-top-color: #333;
+    }
+
+    .tooltip.visible {
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
@@ -200,7 +231,10 @@
     <form id="loginForm">
       <div class="field">
         <label for="username">用户名</label>
-        <input type="text" id="username" placeholder="请输入用户名" autocomplete="username" />
+        <div class="input-wrap">
+          <input type="text" id="username" placeholder="请输入用户名" autocomplete="username" />
+          <div id="usernameTooltip" class="tooltip">用户名最多 20 个字符</div>
+        </div>
       </div>
 
       <div class="field">
@@ -230,6 +264,6 @@
     <p class="hint">测试账号：admin / 123456</p>
   </div>
 
-  <script type="module" src="dist/login.js"></script>
+  <script type="module" src="src/login.ts"></script>
 </body>
 </html>

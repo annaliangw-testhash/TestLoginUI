@@ -1,3 +1,5 @@
+const MAX_USERNAME_LENGTH = 20;
+
 interface LoginFormData {
   username: string;
   password: string;
@@ -59,6 +61,12 @@ function handleLogin(e: Event): void {
   }, 1200);
 }
 
+function handleUsernameInput(): void {
+  const input = document.getElementById("username") as HTMLInputElement;
+  const tooltip = document.getElementById("usernameTooltip") as HTMLDivElement;
+  tooltip.classList.toggle("visible", input.value.length > MAX_USERNAME_LENGTH);
+}
+
 function togglePassword(): void {
   const input = document.getElementById("password") as HTMLInputElement;
   const icon = document.getElementById("toggleIcon") as HTMLSpanElement;
@@ -77,4 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const toggleBtn = document.getElementById("togglePassword") as HTMLButtonElement;
   toggleBtn.addEventListener("click", togglePassword);
+
+  const usernameInput = document.getElementById("username") as HTMLInputElement;
+  usernameInput.addEventListener("input", handleUsernameInput);
 });

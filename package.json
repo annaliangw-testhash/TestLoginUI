@@ -2,10 +2,13 @@
   "name": "ts-login-ui",
   "version": "1.0.0",
   "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "devDependencies": {
-    "typescript": "^5.4.0"
+    "@vitejs/plugin-basic-ssl": "^2.3.0",
+    "typescript": "^5.4.0",
+    "vite": "^8.0.14"
   }
 }
